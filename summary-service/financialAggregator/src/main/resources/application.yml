@@ -1,0 +1,9 @@
+server:
+  port: 8085
+
+services:
+  account: http://localhost:8080/api/accounts/
+  loan: http://localhost:8081/api/loans/
+  investment: http://localhost:8082/api/investments/
+  card: http://localhost:8083/api/cards/
+  saving: http://localhost:8084/api/saving/
