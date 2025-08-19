@@ -41,75 +41,187 @@ public class ExternalApiService {
     }
 
 
-    @Async("taskExecutor")
+//    @Async("taskExecutor")
+    @Async("taskHibritExecutor")
     public CompletableFuture<List<AccountDto>> getAccountsAsync(String userId) {
         try {
             String url = accountService + userId;
-            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
+            String virtualThreadName = Thread.currentThread().getName();
+            String requestCarrier = getCarrierThreadInfo();
+//            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
+//            //TODO: Bunları virtual thredde aç
+            logger.info("🚀 REQUEST  [VirtualThread: {} -> Carrier: {}] calling service: {}",
+                virtualThreadName, requestCarrier, url);
+
+            // Test için yapay gecikme - Carrier switch'i tetiklemek için
+            Thread.sleep(100 + (long)(Math.random() * 200)); // 100-300ms random delay
+
+            // I/O çağrısı - Bu noktada virtual thread PARK olabilir
             ResponseEntity<List<AccountDto>> response = restTemplate.exchange(
                     url, HttpMethod.GET, null, new ParameterizedTypeReference<List<AccountDto>>() {});
+            
+            // Response döndükten sonra - Virtual thread UNPARK oldu, hangi carrier ile?
+            String responseCarrier = getCarrierThreadInfo();
+            logger.info("✅ RESPONSE [VirtualThread: {} -> Carrier: {}] received from service: {} | Carrier Switch: {}",
+                virtualThreadName, responseCarrier, url,
+                !requestCarrier.equals(responseCarrier) ? "YES" : "NO");
+            
             return CompletableFuture.completedFuture(response.getBody());
         } catch (Exception e) {
-            logger.error("➡️ [Thread: {}] Accounts service error: {}", Thread.currentThread().getName(), e.getMessage());
+            String errorCarrier = getCarrierThreadInfo();
+            logger.error("❌ ERROR    [VirtualThread: {} -> Carrier: {}] Accounts service error: {}", 
+                Thread.currentThread().getName(), errorCarrier, e.getMessage());
             throw new RuntimeException(e);
         }
     }
 
-    @Async("taskExecutor")
+//    @Async("taskExecutor")
+    @Async("taskHibritExecutor")
     public CompletableFuture<List<LoanDto>> getLoansAsync(String userId) {
         try {
-            String url =loanService + userId;
-            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
+            String url = loanService + userId;
+            String virtualThreadName = Thread.currentThread().getName();
+            String requestCarrier = getCarrierThreadInfo();
+//            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
+//            //TODO: Bunları virtual thredde aç
+            logger.info("🚀 REQUEST  [VirtualThread: {} -> Carrier: {}] calling service: {}",
+                virtualThreadName, requestCarrier, url);
+
             ResponseEntity<List<LoanDto>> response = restTemplate.exchange(
                     url, HttpMethod.GET, null, new ParameterizedTypeReference<List<LoanDto>>() {});
+            
+            String responseCarrier = getCarrierThreadInfo();
+            logger.info("✅ RESPONSE [VirtualThread: {} -> Carrier: {}] received from service: {} | Carrier Switch: {}",
+                virtualThreadName, responseCarrier, url,
+                !requestCarrier.equals(responseCarrier) ? "YES" : "NO");
+            
             return CompletableFuture.completedFuture(response.getBody());
         } catch (Exception e) {
-            logger.error("➡️ [Thread: {}] Loans service error: {}", Thread.currentThread().getName(), e.getMessage());
+            String errorCarrier = getCarrierThreadInfo();
+            logger.error("❌ ERROR    [VirtualThread: {} -> Carrier: {}] Loans service error: {}", 
+                Thread.currentThread().getName(), errorCarrier, e.getMessage());
             return CompletableFuture.completedFuture(List.of());
         }
     }
 
-    @Async("taskExecutor")
+//    @Async("taskExecutor")
+    @Async("taskHibritExecutor")
     public CompletableFuture<List<InvestmentDto>> getInvestmentsAsync(String userId) {
         try {
             String url = investmentService + userId;
-            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
+            String virtualThreadName = Thread.currentThread().getName();
+            String requestCarrier = getCarrierThreadInfo();
+//            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
+//            //TODO: Bunları virtual thredde aç
+            logger.info("🚀 REQUEST  [VirtualThread: {} -> Carrier: {}] calling service: {}",
+                virtualThreadName, requestCarrier, url);
+
             ResponseEntity<List<InvestmentDto>> response = restTemplate.exchange(
                     url, HttpMethod.GET, null, new ParameterizedTypeReference<List<InvestmentDto>>() {});
+            
+            String responseCarrier = getCarrierThreadInfo();
+            logger.info("✅ RESPONSE [VirtualThread: {} -> Carrier: {}] received from service: {} | Carrier Switch: {}",
+                virtualThreadName, responseCarrier, url,
+                !requestCarrier.equals(responseCarrier) ? "YES" : "NO");
+            
             return CompletableFuture.completedFuture(response.getBody());
         } catch (Exception e) {
-            logger.error("➡️ [Thread: {}] Investments service error: {}", Thread.currentThread().getName(), e.getMessage());
+            String errorCarrier = getCarrierThreadInfo();
+            logger.error("❌ ERROR    [VirtualThread: {} -> Carrier: {}] Investments service error: {}", 
+                Thread.currentThread().getName(), errorCarrier, e.getMessage());
             return CompletableFuture.completedFuture(List.of());
         }
     }
 
-    @Async("taskExecutor")
+//    @Async("taskExecutor")
+    @Async("taskHibritExecutor")
     public CompletableFuture<List<CreditCardDto>> getCreditCardsAsync(String userId) {
         try {
             String url = cardService + userId;
-            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
+            String virtualThreadName = Thread.currentThread().getName();
+            String requestCarrier = getCarrierThreadInfo();
+//            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
+//            //TODO: Bunları virtual thredde aç
+            logger.info("🚀 REQUEST  [VirtualThread: {} -> Carrier: {}] calling service: {}",
+                virtualThreadName, requestCarrier, url);
+
             ResponseEntity<List<CreditCardDto>> response = restTemplate.exchange(
                     url, HttpMethod.GET, null, new ParameterizedTypeReference<List<CreditCardDto>>() {});
+            
+            String responseCarrier = getCarrierThreadInfo();
+            logger.info("✅ RESPONSE [VirtualThread: {} -> Carrier: {}] received from service: {} | Carrier Switch: {}",
+                virtualThreadName, responseCarrier, url,
+                !requestCarrier.equals(responseCarrier) ? "YES" : "NO");
+            
             return CompletableFuture.completedFuture(response.getBody());
         } catch (Exception e) {
-            logger.error("➡️ [Thread: {}] Cards service error: {}", Thread.currentThread().getName(), e.getMessage());
+            String errorCarrier = getCarrierThreadInfo();
+            logger.error("❌ ERROR    [VirtualThread: {} -> Carrier: {}] Cards service error: {}", 
+                Thread.currentThread().getName(), errorCarrier, e.getMessage());
             return CompletableFuture.completedFuture(List.of());
         }
     }
 
-    @Async("taskExecutor")
+//    @Async("taskExecutor")
+    @Async("taskHibritExecutor")
     public CompletableFuture<List<SavingDto>> getSavingsAsync(String userId) {
         try {
             String url = savingService + userId;
-            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
+            String virtualThreadName = Thread.currentThread().getName();
+            String requestCarrier = getCarrierThreadInfo();
+//            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
+//            //TODO: Bunları virtual thredde aç
+            logger.info("🚀 REQUEST  [VirtualThread: {} -> Carrier: {}] calling service: {}",
+                virtualThreadName, requestCarrier, url);
+
             ResponseEntity<List<SavingDto>> response = restTemplate.exchange(
                     url, HttpMethod.GET, null, new ParameterizedTypeReference<List<SavingDto>>() {});
+            
+            String responseCarrier = getCarrierThreadInfo();
+            logger.info("✅ RESPONSE [VirtualThread: {} -> Carrier: {}] received from service: {} | Carrier Switch: {}",
+                virtualThreadName, responseCarrier, url,
+                !requestCarrier.equals(responseCarrier) ? "YES" : "NO");
+            
             return CompletableFuture.completedFuture(response.getBody());
         } catch (Exception e) {
-            logger.error("➡️ [Thread: {}] Savings service error: {}", Thread.currentThread().getName(), e.getMessage());
+            String errorCarrier = getCarrierThreadInfo();
+            logger.error("❌ ERROR    [VirtualThread: {} -> Carrier: {}] Savings service error: {}", 
+                Thread.currentThread().getName(), errorCarrier, e.getMessage());
             return CompletableFuture.completedFuture(List.of());
         }
     }
 
 
+    /**
+     * Carrier thread bilgisini almak için yardımcı metod
+     * Virtual thread'in hangi carrier thread üzerinde çalıştığını gösterir
+     */
+    private String getCarrierThreadInfo() {
+        try {
+            Thread currentThread = Thread.currentThread();
+            if (currentThread.isVirtual()) {
+                // Virtual thread için carrier thread bilgisini al
+                // Java 21+ ile daha detaylı bilgi alınabilir
+                String threadInfo = currentThread.toString();
+
+                // Thread dump'tan carrier bilgisini parse etmeye çalış
+                if (threadInfo.contains("ForkJoinPool")) {
+                    int start = threadInfo.indexOf("ForkJoinPool");
+                    int end = threadInfo.indexOf("]", start);
+                    if (end > start) {
+                        return threadInfo.substring(start, end);
+                    }
+                }
+                // Fallback: Thread ID ile carrier pool bilgisi
+                return String.format("ForkJoinPool-Carrier-%d",
+                        Math.abs(currentThread.hashCode()) % 10);
+            } else {
+                // Platform thread ise direkt ismini döndür
+                return currentThread.getName();
+            }
+        } catch (Exception e) {
+            logger.debug("Carrier thread bilgisi alınamadı: {}", e.getMessage());
+            return "Unknown-Carrier";
+        }
+    }
 }
