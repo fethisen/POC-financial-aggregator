@@ -11,7 +11,6 @@ import java.util.concurrent.Executor;
 @Configuration
 @EnableAsync
 public class AsyncHibritConfig {
-    private static final Logger logger = LoggerFactory.getLogger(AsyncHibritConfig.class);
     /**
      * Hibrit Virtual Thread + Carrier Thread Control Yaklaşımı
      *
@@ -37,11 +36,15 @@ public class AsyncHibritConfig {
      *
      * @return Virtual Thread Executor with Controlled Carriers
      */
+
+    //TODO: burada şunlar jvm parametresi olarak verilmeli: -Djdk.virtualThreadScheduler.parallelism=5
+    //-Djdk.virtualThreadScheduler.maxPoolSize=10
     @Bean(name = "taskHibritExecutor")
     public Executor taskExecutor() {
         // JVM seviyesinde carrier thread kontrolü - Test için azaltıldı
-        System.setProperty("jdk.virtualThreadScheduler.parallelism", "2");
-        System.setProperty("jdk.virtualThreadScheduler.maxPoolSize", "3");
+        //TODO: JVM ayarı olarak verdim.
+//        System.setProperty("jdk.virtualThreadScheduler.parallelism", "2");
+//        System.setProperty("jdk.virtualThreadScheduler.maxPoolSize", "3");
 
         // Virtual Thread Factory ile her thread için unique isim
         var virtualThreadFactory = Thread.ofVirtual()
