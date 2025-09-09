@@ -21,7 +21,7 @@ public class LoanController {
 
     @GetMapping("/{userId}")
     public List<LoanDto> getLoans(@PathVariable String userId) throws InterruptedException{
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(5);
         return List.of(
                 new LoanDto("İhtiyaç Kredisi", new BigDecimal("25000.00")),
                 new LoanDto("Konut Kredisi", new BigDecimal("100000.00"))

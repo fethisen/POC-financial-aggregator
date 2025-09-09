@@ -20,7 +20,7 @@ public class SavingController {
      */
     @GetMapping("/{userId}")
     public List<SavingDto> getSavings(@PathVariable String userId) throws InterruptedException {
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(5);
 
         return List.of(
                 new SavingDto("Vadeli Mevduat", new BigDecimal("10000.00")),

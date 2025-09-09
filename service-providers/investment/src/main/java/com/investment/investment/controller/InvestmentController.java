@@ -20,7 +20,7 @@ public class InvestmentController {
      */
     @GetMapping("/{userId}")
     public List<InvestmentDto> getInvestments(@PathVariable String userId) throws InterruptedException {
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(5);
 
         return List.of(
                 new InvestmentDto("Fon", new BigDecimal("8000.50")),

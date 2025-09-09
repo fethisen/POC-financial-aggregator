@@ -53,10 +53,9 @@ public class ExternalApiService {
             logger.info("🚀 REQUEST  [VirtualThread: {} -> Carrier: {}] calling service: {}",
                 virtualThreadName, requestCarrier, url);
 
-            // Test için yapay gecikme - Carrier switch'i tetiklemek için
-            Thread.sleep(100 + (long)(Math.random() * 200)); // 100-300ms random delay
 
-            // I/O çağrısı - Bu noktada virtual thread PARK olabilir
+
+            // I/O çağrısı - Bu noktada virtual thread PARK olacak
             ResponseEntity<List<AccountDto>> response = restTemplate.exchange(
                     url, HttpMethod.GET, null, new ParameterizedTypeReference<List<AccountDto>>() {});
             

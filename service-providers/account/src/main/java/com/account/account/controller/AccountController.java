@@ -20,7 +20,7 @@ public class AccountController {
      */
     @GetMapping("{userId}")
     public List<AccountDto> getAccounts(@PathVariable String userId) throws InterruptedException {
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(5);
         return List.of(
                 new AccountDto("TR1234567890", new BigDecimal("12500.00")),
                 new AccountDto("TR0987654321", new BigDecimal("3000.00"))

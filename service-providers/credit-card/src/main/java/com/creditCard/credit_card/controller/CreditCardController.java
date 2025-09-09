@@ -20,7 +20,7 @@ public class CreditCardController {
      */
     @GetMapping("/{userId}")
     public List<CreditCardDto> getCards(@PathVariable String userId) throws InterruptedException {
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(5);
 
         return List.of(
                 new CreditCardDto("**** **** 1111", new BigDecimal("3200.00")),
