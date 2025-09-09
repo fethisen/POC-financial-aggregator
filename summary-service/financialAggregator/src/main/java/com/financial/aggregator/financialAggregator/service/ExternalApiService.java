@@ -48,10 +48,11 @@ public class ExternalApiService {
             String url = accountService + userId;
             String virtualThreadName = Thread.currentThread().getName();
             String requestCarrier = getCarrierThreadInfo();
+            String threadType = Thread.currentThread().isVirtual() ? "Virtual" : "Platform";
 //            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
 //            //TODO: Bunları virtual thredde aç
-            logger.info("🚀 REQUEST  [VirtualThread: {} -> Carrier: {}] calling service: {}",
-                virtualThreadName, requestCarrier, url);
+            logger.info("🚀 REQUEST  [Thread: {} | Type: {} | Carrier: {}] calling service: {}",
+                virtualThreadName, threadType, requestCarrier, url);
 
 
 
@@ -83,8 +84,9 @@ public class ExternalApiService {
             String requestCarrier = getCarrierThreadInfo();
 //            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
 //            //TODO: Bunları virtual thredde aç
-            logger.info("🚀 REQUEST  [VirtualThread: {} -> Carrier: {}] calling service: {}",
-                virtualThreadName, requestCarrier, url);
+            String threadType = Thread.currentThread().isVirtual() ? "Virtual" : "Platform";
+            logger.info("🚀 REQUEST  [Thread: {} | Type: {} | Carrier: {}] calling service: {}",
+                virtualThreadName, threadType, requestCarrier, url);
 
             ResponseEntity<List<LoanDto>> response = restTemplate.exchange(
                     url, HttpMethod.GET, null, new ParameterizedTypeReference<List<LoanDto>>() {});
@@ -112,8 +114,9 @@ public class ExternalApiService {
             String requestCarrier = getCarrierThreadInfo();
 //            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
 //            //TODO: Bunları virtual thredde aç
-            logger.info("🚀 REQUEST  [VirtualThread: {} -> Carrier: {}] calling service: {}",
-                virtualThreadName, requestCarrier, url);
+            String threadType = Thread.currentThread().isVirtual() ? "Virtual" : "Platform";
+            logger.info("🚀 REQUEST  [Thread: {} | Type: {} | Carrier: {}] calling service: {}",
+                virtualThreadName, threadType, requestCarrier, url);
 
             ResponseEntity<List<InvestmentDto>> response = restTemplate.exchange(
                     url, HttpMethod.GET, null, new ParameterizedTypeReference<List<InvestmentDto>>() {});
@@ -141,8 +144,9 @@ public class ExternalApiService {
             String requestCarrier = getCarrierThreadInfo();
 //            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
 //            //TODO: Bunları virtual thredde aç
-            logger.info("🚀 REQUEST  [VirtualThread: {} -> Carrier: {}] calling service: {}",
-                virtualThreadName, requestCarrier, url);
+            String threadType = Thread.currentThread().isVirtual() ? "Virtual" : "Platform";
+            logger.info("🚀 REQUEST  [Thread: {} | Type: {} | Carrier: {}] calling service: {}",
+                virtualThreadName, threadType, requestCarrier, url);
 
             ResponseEntity<List<CreditCardDto>> response = restTemplate.exchange(
                     url, HttpMethod.GET, null, new ParameterizedTypeReference<List<CreditCardDto>>() {});
@@ -170,8 +174,9 @@ public class ExternalApiService {
             String requestCarrier = getCarrierThreadInfo();
 //            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
 //            //TODO: Bunları virtual thredde aç
-            logger.info("🚀 REQUEST  [VirtualThread: {} -> Carrier: {}] calling service: {}",
-                virtualThreadName, requestCarrier, url);
+            String threadType = Thread.currentThread().isVirtual() ? "Virtual" : "Platform";
+            logger.info("🚀 REQUEST  [Thread: {} | Type: {} | Carrier: {}] calling service: {}",
+                virtualThreadName, threadType, requestCarrier, url);
 
             ResponseEntity<List<SavingDto>> response = restTemplate.exchange(
                     url, HttpMethod.GET, null, new ParameterizedTypeReference<List<SavingDto>>() {});

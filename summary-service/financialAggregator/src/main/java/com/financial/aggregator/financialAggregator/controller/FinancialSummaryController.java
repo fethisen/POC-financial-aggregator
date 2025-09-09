@@ -25,7 +25,10 @@ public class FinancialSummaryController {
     @GetMapping("/financial-summary/{userId}")
     public ResponseEntity<FinancialSummaryResponse> getFinancialSummary(@PathVariable String userId) {
         try {
-            logger.info("➡️ [Thread: {}] Received request for userId: {}", Thread.currentThread().getName(), userId);
+            Thread currentThread = Thread.currentThread();
+            String threadType = currentThread.isVirtual() ? "Virtual" : "Platform";
+            logger.info("➡️ [Thread: {} | Type: {} | isVirtual: {}] Received request for userId: {}", 
+                currentThread.getName(), threadType, currentThread.isVirtual(), userId);
             FinancialSummaryResponse summary = financialSummaryService.getFinancialSummary(userId);
             return ResponseEntity.ok(summary);
         } catch (Exception e) {

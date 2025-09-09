@@ -7,3 +7,10 @@ services:
   investment: http://localhost:8082/api/investments/
   card: http://localhost:8083/api/cards/
   saving: http://localhost:8084/api/saving/
+
+
+
+#spring:
+#  threads:
+#    virtual:
+#      enabled: true

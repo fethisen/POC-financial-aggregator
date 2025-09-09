@@ -41,11 +41,6 @@ public class AsyncHibritConfig {
     //-Djdk.virtualThreadScheduler.maxPoolSize=10
     @Bean(name = "taskHibritExecutor")
     public Executor taskExecutor() {
-        // JVM seviyesinde carrier thread kontrolü - Test için azaltıldı
-        //TODO: JVM ayarı olarak verdim.
-//        System.setProperty("jdk.virtualThreadScheduler.parallelism", "2");
-//        System.setProperty("jdk.virtualThreadScheduler.maxPoolSize", "3");
-
         // Virtual Thread Factory ile her thread için unique isim
         var virtualThreadFactory = Thread.ofVirtual()
                 .name("VirtualWorker-", 0)  // 0'dan başlayarak otomatik increment
