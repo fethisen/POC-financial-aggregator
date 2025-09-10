@@ -45,7 +45,11 @@ public class ExternalApiService {
     public CompletableFuture<List<AccountDto>> getAccountsAsync(String userId) {
         try {
             String url = accountService + userId;
-            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
+            Thread currentThread = Thread.currentThread();
+            String threadType = Thread.currentThread().isVirtual() ? "Virtual" : "Platform";
+            logger.info("🚀 REQUEST [Thread: {} | Type: {} ] called service: {}",
+                    currentThread.getName(), threadType, url);
+
 
             // I/O çağrısı - Bu noktada virtual thread PARK olacak
             ResponseEntity<List<AccountDto>> response = restTemplate.exchange(
@@ -62,11 +66,14 @@ public class ExternalApiService {
         try {
             String url = loanService + userId;
 
-            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
+            Thread currentThread = Thread.currentThread();
+            String threadType = Thread.currentThread().isVirtual() ? "Virtual" : "Platform";
+            logger.info("🚀 REQUEST [Thread: {} | Type: {} ] called service: {}",
+                    currentThread.getName(), threadType, url);
 
             ResponseEntity<List<LoanDto>> response = restTemplate.exchange(
                     url, HttpMethod.GET, null, new ParameterizedTypeReference<List<LoanDto>>() {});
-            
+
             return CompletableFuture.completedFuture(response.getBody());
         } catch (Exception e) {
             logger.error("❌ ERROR   Loans service error: {}", e.getMessage());
@@ -78,7 +85,11 @@ public class ExternalApiService {
     public CompletableFuture<List<InvestmentDto>> getInvestmentsAsync(String userId) {
         try {
             String url = investmentService + userId;
-            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
+            Thread currentThread = Thread.currentThread();
+            String threadType = Thread.currentThread().isVirtual() ? "Virtual" : "Platform";
+            logger.info("🚀 REQUEST [Thread: {} | Type: {} ] called service: {}",
+                    currentThread.getName(), threadType, url);
+
             ResponseEntity<List<InvestmentDto>> response = restTemplate.exchange(
                     url, HttpMethod.GET, null, new ParameterizedTypeReference<List<InvestmentDto>>() {});
 
@@ -93,7 +104,11 @@ public class ExternalApiService {
     public CompletableFuture<List<CreditCardDto>> getCreditCardsAsync(String userId) {
         try {
             String url = cardService + userId;
-            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
+            Thread currentThread = Thread.currentThread();
+            String threadType = Thread.currentThread().isVirtual() ? "Virtual" : "Platform";
+            logger.info("🚀 REQUEST [Thread: {} | Type: {} ] called service: {}",
+                    currentThread.getName(), threadType, url);
+
             ResponseEntity<List<CreditCardDto>> response = restTemplate.exchange(
                     url, HttpMethod.GET, null, new ParameterizedTypeReference<List<CreditCardDto>>() {});
             return CompletableFuture.completedFuture(response.getBody());
@@ -107,7 +122,10 @@ public class ExternalApiService {
     public CompletableFuture<List<SavingDto>> getSavingsAsync(String userId) {
         try {
             String url = savingService + userId;
-            logger.info("➡️ [Thread: {}] called service: {}", Thread.currentThread().getName(), url);
+            Thread currentThread = Thread.currentThread();
+            String threadType = Thread.currentThread().isVirtual() ? "Virtual" : "Platform";
+            logger.info("🚀 REQUEST️ [Thread: {} | Type: {} ] called service: {}",
+                    currentThread.getName(), threadType, url);
             ResponseEntity<List<SavingDto>> response = restTemplate.exchange(
                     url, HttpMethod.GET, null, new ParameterizedTypeReference<List<SavingDto>>() {});
 

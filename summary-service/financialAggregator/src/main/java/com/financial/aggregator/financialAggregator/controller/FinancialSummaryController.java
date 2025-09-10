@@ -27,8 +27,8 @@ public class FinancialSummaryController {
         try {
             Thread currentThread = Thread.currentThread();
             String threadType = currentThread.isVirtual() ? "Virtual" : "Platform";
-            logger.info("➡️ [Thread: {} | Type: {} | isVirtual: {}] Received request for userId: {}", 
-                currentThread.getName(), threadType, currentThread.isVirtual(), userId);
+            logger.info("➡️ [Thread: {} | Type: {} ] Received request for userId: {}",
+                currentThread.getName(), threadType, userId);
             FinancialSummaryResponse summary = financialSummaryService.getFinancialSummary(userId);
             return ResponseEntity.ok(summary);
         } catch (Exception e) {
