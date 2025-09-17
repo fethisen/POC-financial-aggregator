@@ -1,7 +1,6 @@
 package com.financial.aggregator.financialAggregator.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -10,7 +9,7 @@ import java.util.concurrent.Executor;
 
 @Configuration
 @EnableAsync
-public class AsyncHibritConfig {
+public class AsyncVirtualConfig {
     /**
      * Hibrit Virtual Thread + Carrier Thread Control Yaklaşımı
      *
@@ -39,7 +38,7 @@ public class AsyncHibritConfig {
 
     //TODO: burada şunlar jvm parametresi olarak verilmeli: -Djdk.virtualThreadScheduler.parallelism=5
     //-Djdk.virtualThreadScheduler.maxPoolSize=10
-    @Bean(name = "taskHibritExecutor")
+    @Bean(name = "taskVirtualExecutor")
     public Executor taskExecutor() {
         // Virtual Thread Factory ile her thread için unique isim
         var virtualThreadFactory = Thread.ofVirtual()

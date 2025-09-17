@@ -41,7 +41,7 @@ public class ExternalApiServiceVirTualThread {
     }
 
 
-    @Async("taskHibritExecutor")
+    @Async("taskVirtualExecutor")
     public CompletableFuture<List<AccountDto>> getAccountsAsync(String userId) {
         try {
             String url = accountService + userId;
@@ -67,7 +67,7 @@ public class ExternalApiServiceVirTualThread {
         }
     }
 
-    @Async("taskHibritExecutor")
+    @Async("taskVirtualExecutor")
     public CompletableFuture<List<LoanDto>> getLoansAsync(String userId) {
         try {
             String url = loanService + userId;
@@ -92,7 +92,7 @@ public class ExternalApiServiceVirTualThread {
         }
     }
 
-    @Async("taskHibritExecutor")
+    @Async("taskVirtualExecutor")
     public CompletableFuture<List<InvestmentDto>> getInvestmentsAsync(String userId) {
         try {
             String url = investmentService + userId;
@@ -116,7 +116,7 @@ public class ExternalApiServiceVirTualThread {
         }
     }
 
-    @Async("taskHibritExecutor")
+    @Async("taskVirtualExecutor")
     public CompletableFuture<List<CreditCardDto>> getCreditCardsAsync(String userId) {
         try {
             String url = cardService + userId;
@@ -140,7 +140,7 @@ public class ExternalApiServiceVirTualThread {
         }
     }
 
-    @Async("taskHibritExecutor")
+    @Async("taskVirtualExecutor")
     public CompletableFuture<List<SavingDto>> getSavingsAsync(String userId) {
         try {
             String url = savingService + userId;
